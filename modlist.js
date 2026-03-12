@@ -6,8 +6,8 @@ export class Modlist {
 
         this.modListArray       = []
         const modStringLines    = modListString.split('\n')
-        modStringLines.forEach(modListString => {
-            this.modListArray.push(new Mod(modListString))
+        modStringLines.forEach(modListLine => {
+            this.modListArray.push(new Mod(modListLine))
         });
 
     }
