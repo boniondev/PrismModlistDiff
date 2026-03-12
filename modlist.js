@@ -22,7 +22,7 @@ export class Modlist {
 
             let modFound = false
 
-            for (secondModListMod of secondModListArray) {
+            for (let secondModListMod of secondModListArray) {
                 const bitmask = mod.compare(secondModListMod)
                 if (bitmask & Mod.BIT_NAME || bitmask & Mod.BIT_URL || bitmask & Mod.BIT_AUTHOR) continue // This is an entirely different mod, we can skip checking the rest
                 if (bitmask & Mod.BIT_VERSION) {
