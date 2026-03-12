@@ -4,5 +4,7 @@ const listOneInputText      = document.getElementById("listOneInputText")
 const listTwoInputText      = document.getElementById("listTwoInputText")
 
 listInputForm.addEventListener("submit", (e) => {
+
     e.preventDefault()
+
 })
