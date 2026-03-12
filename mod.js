@@ -16,8 +16,8 @@ export class Mod {
         this.modName     = parsedline[0]
         this.modURL      = parsedline[1]
         this.modVersion  = parsedline[2]
-        this.modAuthor   = parsedline[3]
-        this.modFilename = parsedline[parsedline.length - 1] // We only take the first author for simplicity
+        this.modAuthor   = parsedline[3]  // We only take the first author for simplicity
+        this.modFilename = parsedline[parsedline.length - 1]
 
     }
 
