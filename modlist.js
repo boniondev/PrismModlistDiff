@@ -26,10 +26,12 @@ export class Modlist {
                 if (bitmask & Mod.BIT_NAME || bitmask & Mod.BIT_URL || bitmask & Mod.BIT_AUTHOR) continue // This is an entirely different mod, we can skip checking the rest
                 if (bitmask & Mod.BIT_VERSION) {
                     modReports.push(new ModReport(ModReport.MOD_VERSION_MISMATCH, mod, secondModListMod.getModVersion()))
+                    modFound = true // The mod IS there, it just has a different version
                     continue
                 }
                 if (bitmask & Mod.BIT_FILENAME) { // Ideally this never happens because the version is also likely different
                     modReports.push(new ModReport(ModReport.MOD_FILENAME_MISMATCH, mod, secondModListMod.getModFilename()))
+                    modFound = true
                     continue
                 }
                 modFound = true // If this part of the code is reached, it means that all the fields are identical (no bits set)
