@@ -19,6 +19,8 @@ listInputForm.addEventListener("submit", (e) => {
 
     if (modReports.length == 0) {
         console.log("They be the same!!!")
+    } else {
+        console.log(modReports)
     }
 
 })
