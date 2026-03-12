@@ -1,13 +1,13 @@
 import { Mod } from 'mod.js'
 export class Modlist {
 
-    constructor(modliststring) {
+    constructor(modListString) {
 
-        let modliststring = ""
-        this.modlistarray = []
-        modstringlines    = modliststring.split('\n')
-        modstringlines.forEach(modliststring => {
-            this.modlistarray.push(new Mod(modliststring))
+        let modListString = ""
+        this.modListArray = []
+        modStringLines    = modListString.split('\n')
+        modStringLines.forEach(modListString => {
+            this.modListArray.push(new Mod(modListString))
         });
 
     }
