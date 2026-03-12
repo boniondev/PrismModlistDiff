@@ -31,11 +31,11 @@ export class Mod {
 
         let mask = 0
 
-        if (this.modName !== mod.getModName())         mask |= BIT_NAME
-        if (this.modURL !== mod.getModURL())           mask |= BIT_URL
-        if (this.modVersion !== mod.getModVersion())   mask |= BIT_VERSION
-        if (this.modAuthor !== mod.getModAuthor())     mask |= BIT_AUTHOR
-        if (this.modFilename !== mod.getModFilename()) mask |= BIT_FILENAME
+        if (this.modName !== mod.getModName())         mask |= Mod.BIT_NAME
+        if (this.modURL !== mod.getModURL())           mask |= Mod.BIT_URL
+        if (this.modVersion !== mod.getModVersion())   mask |= Mod.BIT_VERSION
+        if (this.modAuthor !== mod.getModAuthor())     mask |= Mod.BIT_AUTHOR
+        if (this.modFilename !== mod.getModFilename()) mask |= Mod.BIT_FILENAME
 
         return mask
 
