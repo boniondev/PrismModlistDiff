@@ -11,7 +11,8 @@ export class Mod {
 
     constructor(linestr) {
 
-        let parsedline   = linestr.split(',')
+        let parsedline   = [""]
+        parsedline       = linestr.split(',')
         this.modName     = parsedline[0]
         this.modURL      = parsedline[1]
         this.modVersion  = parsedline[2]
