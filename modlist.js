@@ -52,9 +52,7 @@ export class Modlist {
 
                 if (!(bitmask & Mod.BIT_NAME)
                     && !(bitmask & Mod.BIT_URL)
-                    && !(bitmask & Mod.BIT_AUTHOR)
-                    && !(bitmask & Mod.BIT_VERSION)
-                    && !(bitmask & Mod.BIT_FILENAME)) {
+                    && !(bitmask & Mod.BIT_AUTHOR)) {
                         correspondingModFound = true
                         break
                     }
