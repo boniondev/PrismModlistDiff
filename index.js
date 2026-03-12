@@ -8,12 +8,12 @@ listInputForm.addEventListener("submit", (e) => {
 
     e.preventDefault()
 
-    if (listOneInputText.textContent == '' && listTwoInputText.textContent == ''){
+    if (listOneInputText.value == '' && listTwoInputText.value == ''){
         // Cry about it here
     }
 
-    const targetModList  = new Modlist(listOneInputText.textContent)
-    const currentModList = new Modlist(listTwoInputText.textContent)
+    const targetModList  = new Modlist(listOneInputText.value)
+    const currentModList = new Modlist(listTwoInputText.value)
 
     const modReports = targetModList.compare(currentModList)
 
