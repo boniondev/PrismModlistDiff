@@ -7,4 +7,8 @@ listInputForm.addEventListener("submit", (e) => {
 
     e.preventDefault()
 
+    if (listOneInputText.textContent == '' && listTwoInputText.textContent == ''){
+        // Cry about it here
+    }
+
 })
