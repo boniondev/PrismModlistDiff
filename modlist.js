@@ -1,12 +1,11 @@
 import { Mod }       from './mod.js'
-import { ModReport } from './modreport'
+import { ModReport } from './modreport.js'
 export class Modlist {
 
     constructor(modListString) {
 
-        let modListString = ""
-        this.modListArray = []
-        modStringLines    = modListString.split('\n')
+        this.modListArray       = []
+        const modStringLines    = modListString.split('\n')
         modStringLines.forEach(modListString => {
             this.modListArray.push(new Mod(modListString))
         });

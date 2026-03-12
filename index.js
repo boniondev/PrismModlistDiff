@@ -1,4 +1,4 @@
-import { Modlist } from "./modlist"
+import { Modlist } from "./modlist.js"
 
 const listInputForm         = document.getElementById("listInputForm")
 const listOneInputText      = document.getElementById("listOneInputText")
