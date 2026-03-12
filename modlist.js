@@ -41,6 +41,31 @@ export class Modlist {
 
         })
 
+        for (let secondModListMod of secondModListArray) {
+
+            let correspondingModFound = false
+
+            for (let mod of this.modListArray) {
+
+                const bitmask = secondModListMod.compare(mod)
+
+                if (!(bitmask & Mod.BIT_NAME)
+                    && !(bitmask & Mod.BIT_URL)
+                    && !(bitmask & Mod.BIT_AUTHOR)
+                    && !(bitmask & Mod.BIT_VERSION)
+                    && !(bitmask & Mod.BIT_FILENAME)) {
+                        correspondingModFound = true
+                        break
+                    }
+
+            }
+
+            if (!correspondingModFound) modReports.push(new ModReport(ModReport.MOD_UNEXPECTED, secondModListMod))
+
+        }
+
+        return modReports
+
     }
 
     getModListArray() {
