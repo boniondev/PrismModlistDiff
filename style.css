@@ -44,30 +44,3 @@ html, body {
     font-size: 2em;
     opacity: 0;
 }
-/*
-#listInputTextWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
-}
-#listInputForm {
-    display: flex;
-    flex-direction: column;
-    gap: 2vh;
-}
-#listInputTextAreaWrapper {
-    display: flex;
-    gap: 3vw;
-}
-.listInputTextAreaList {
-    height: 60vh;
-    resize: none;
-    width: 35vw;
-}
-#ListInputSubmitButton {
-    margin: auto;
-    width: fit-content;
-}
-*/
