@@ -99,16 +99,29 @@ function fadeOutInputTextWrapper() {
 
 function compareModLists() {
 
-    const before = Date.now()
-
     const parsedFirstModList  = new Modlist(firstModList)
     const parsedSecondModList = new Modlist(secondModList)
 
     const modReports = parsedFirstModList.compare(parsedSecondModList)
 
-    console.log(firstModList)
-    console.log(parsedFirstModList)
+    showResults(modReports)
 
-    console.log("Checking took " + (Date.now() - before) + "ms")
-    console.log(modReports)
+}
+
+function showResults(modReports) {
+
+    const appWrapper = document.getElementById('appWrapper')
+
+    const resultWrapper = document.createElement('div')
+    resultWrapper.id = 'resultWrapper'
+
+    if (modReports.length == 0) {
+        const divIdenticalModLists       = document.createElement('div')
+        divIdenticalModLists.id          = 'divIdenticalModLists'
+        divIdenticalModLists.textContent = 'The modlists are identical.'
+        resultWrapper.appendChild(divIdenticalModLists)
+        appWrapper.appendChild(resultWrapper)
+        fadeInElement(divIdenticalModLists)
+    }
+
 }
