@@ -48,7 +48,7 @@ function _on_inputText_input() {
         if (firstModList === '') {
             firstModList = inputText.value
             inputText.value = ''
-            inputText.placeholder = 'Paste your second modlist here...'
+            inputText.placeholder = 'Paste the current modlist here...'
         }
         else if (secondModList === '') {
             inputText.disabled = true
