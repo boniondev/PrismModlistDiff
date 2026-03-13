@@ -31,6 +31,8 @@ listInputForm.addEventListener("submit", (e) => {
 const inputTextWrapper = document.getElementById('inputTextWrapper')
 const inputText        = document.getElementById('inputText')
 
+inputText.focus()
+
 inputText.addEventListener('input', () => {
 
     const pastedText = inputText.value
