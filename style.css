@@ -23,6 +23,7 @@ html, body {
     border: none;
     width: 20vw;
     text-align: center;
+    resize: none;
 }
 #inputText:focus {
     outline: none;
