@@ -95,6 +95,40 @@ function showResults(modReports) {
         resultWrapper.appendChild(divIdenticalModLists)
         appWrapper.appendChild(resultWrapper)
         fadeInElement(divIdenticalModLists)
+    } else {
+
+        let divMissingModsText = document.createElement('div')
+        divMissingModsText.classList.add('resultContainerTextDiv')
+        divMissingModsText.textContent = 'Missing mods'
+
+        let divMissingModsContainer = document.createElement('div')
+        divMissingModsContainer.id  = 'divMissingModsContainer'
+        divMissingModsContainer.classList.add('resultContainer')
+        divMissingModsContainer.appendChild(divMissingModsText)
+
+        let divMismatchedModsText = document.createElement('div')
+        divMismatchedModsText.classList.add('resultContainerTextDiv')
+        divMismatchedModsText.textContent = 'Mismatched mods'
+
+        let divMismatchedModsContainer = document.createElement('div')
+        divMismatchedModsContainer     = 'divMismatchedModsContainer'
+        divMismatchedModsContainer.classList.add('resultContainer')
+        divMismatchedModsContainer.appendChild(divMismatchedModsText)
+
+        let divExtraModsText = document.createElement('div')
+        divExtraModsText.classList.add('resultContainerTextDiv')
+        divExtraModsText.textContent = 'Extra mods'
+
+        let divExtraModsContainer = document.createElement('div')
+        divExtraModsContainer     = 'divExtraModsContainer'
+        divExtraModsContainer.classList.add('resultContainer')
+        divExtraModsContainer.appendChild(divExtraModsText)
+
+        for (let modReport of modReports) {
+
+
+
+        }
     }
 
 }
