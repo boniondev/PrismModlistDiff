@@ -31,6 +31,7 @@ listInputForm.addEventListener("submit", (e) => {
 const inputTextWrapper = document.getElementById('inputTextWrapper')
 const inputText        = document.getElementById('inputText')
 
+fadeInInputTextWrapper()
 inputText.focus()
 
 inputText.addEventListener('input', () => {
@@ -52,9 +53,17 @@ function scoldUserForTypingAndRetry() {
         ease       : 'inExpo', 
         onComplete : () => {
             inputText.value    = ''
+            fadeInInputTextWrapper()
             inputText.disabled = false
             inputTextWrapper.style.color = 'white'
             inputText.focus()
         }
+    })
+}
+
+function fadeInInputTextWrapper() {
+    animate(inputTextWrapper, {
+        opacity  : [0, 1],
+        duration : 1000,
     })
 }
