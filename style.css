@@ -21,7 +21,7 @@ html, body {
     background-color: black;
     color: inherit;
     border: none;
-    width: 15vw;
+    width: 20vw;
     text-align: center;
 }
 #inputText:focus {

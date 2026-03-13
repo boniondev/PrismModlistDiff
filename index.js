@@ -31,18 +31,35 @@ listInputForm.addEventListener("submit", (e) => {
 const inputTextWrapper = document.getElementById('inputTextWrapper')
 const inputText        = document.getElementById('inputText')
 
+let firstModList  = ''
+let secondModList = ''
+
 fadeInInputTextWrapper()
 inputText.focus()
 
-inputText.addEventListener('input', () => {
+inputText.addEventListener('input', _on_inputText_input)
 
+function _on_inputText_input() {
     const pastedText = inputText.value
 
     if (pastedText.length == 1) {
         scoldUserForTypingAndRetry()
+    } else {
+        if (firstModList === '') {
+            firstModList = inputText.value
+            inputText.value = ''
+            inputText.placeholder = 'Paste your second modlist here...'
+        }
+        else if (secondModList === '') {
+            inputText.disabled = true
+            secondModList = inputText.value
+            inputText.placeholder = 'Splendid.'
+            inputText.value = ''
+            inputText.removeEventListener('input', _on_inputText_input)
+            fadeOutInputTextWrapper()
+        }
     }
-
-})
+}
 
 function scoldUserForTypingAndRetry() {
     inputText.disabled = true
@@ -65,5 +82,16 @@ function fadeInInputTextWrapper() {
     animate(inputTextWrapper, {
         opacity  : [0, 1],
         duration : 1000,
+    })
+}
+
+function fadeOutInputTextWrapper() {
+    animate(inputTextWrapper, {
+        opacity    : [1,0],
+        duration   : 1000,
+        easy       : 'inExpo',
+        onComplete : () => {
+            inputTextWrapper.style.display = 'none'
+        }
     })
 }
