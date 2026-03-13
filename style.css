@@ -1,7 +1,35 @@
+@font-face {
+    font-family: "0xProto";
+    src: url("./fonts/0xProto/0xProto-Regular.woff2") format("woff2");
+}
 html, body {
     background-color: black;
     margin: 0;
 }
+#inputTextWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    color: white;
+}
+#inputText {
+    font-family: '0xProto', monospace;
+    font-size: 1rem;
+    background-color: black;
+    color: inherit;
+    border: none;
+    width: 25vw;
+    text-align: center;
+}
+#inputText:focus {
+    outline: none;
+}
+#inputText::placeholder {
+    color: grey;
+}
+/*
 #listInputTextWrapper {
     display: flex;
     align-items: center;
@@ -27,3 +55,4 @@ html, body {
     margin: auto;
     width: fit-content;
 }
+*/
