@@ -19,9 +19,9 @@ html, body {
     gap: 3vw;
 }
 .listInputTextAreaList {
-    height: 25vh;
+    height: 60vh;
     resize: none;
-    width: 15vw;
+    width: 35vw;
 }
 #ListInputSubmitButton {
     margin: auto;
