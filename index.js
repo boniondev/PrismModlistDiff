@@ -92,6 +92,23 @@ function fadeOutInputTextWrapper() {
         easy       : 'inExpo',
         onComplete : () => {
             inputTextWrapper.remove()
+            compareModLists()
         }
     })
+}
+
+function compareModLists() {
+
+    const before = Date.now()
+
+    const parsedFirstModList  = new Modlist(firstModList)
+    const parsedSecondModList = new Modlist(secondModList)
+
+    const modReports = parsedFirstModList.compare(parsedSecondModList)
+
+    console.log(firstModList)
+    console.log(parsedFirstModList)
+
+    console.log("Checking took " + (Date.now() - before) + "ms")
+    console.log(modReports)
 }
