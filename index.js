@@ -34,7 +34,7 @@ const inputText        = document.getElementById('inputText')
 let firstModList  = ''
 let secondModList = ''
 
-fadeInInputTextWrapper()
+fadeInElement(inputTextWrapper)
 inputText.focus()
 
 inputText.addEventListener('input', _on_inputText_input)
@@ -70,7 +70,7 @@ function scoldUserForTypingAndRetry() {
         ease       : 'inExpo', 
         onComplete : () => {
             inputText.value    = ''
-            fadeInInputTextWrapper()
+            fadeInElement(inputTextWrapper)
             inputText.disabled = false
             inputTextWrapper.style.color = 'white'
             inputText.focus()
@@ -78,8 +78,8 @@ function scoldUserForTypingAndRetry() {
     })
 }
 
-function fadeInInputTextWrapper() {
-    animate(inputTextWrapper, {
+function fadeInElement(el) {
+    animate(el, {
         opacity  : [0, 1],
         duration : 1000,
     })
