@@ -28,7 +28,7 @@ listInputForm.addEventListener("submit", (e) => {
 })
 */
 
-const inputTextWrapper = document.getElementById('inputTextWrapper');
+const inputTextWrapper = document.getElementById('inputTextWrapper')
 const inputText        = document.getElementById('inputText')
 
 inputText.addEventListener('input', () => {
