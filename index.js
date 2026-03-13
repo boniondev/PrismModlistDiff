@@ -91,7 +91,7 @@ function fadeOutInputTextWrapper() {
         duration   : 1000,
         easy       : 'inExpo',
         onComplete : () => {
-            inputTextWrapper.style.display = 'none'
+            inputTextWrapper.remove()
         }
     })
 }
