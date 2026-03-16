@@ -23,7 +23,7 @@ export class Modlist {
 
             for (let secondModListMod of secondModListArray) {
                 const bitmask = mod.compare(secondModListMod)
-                if (bitmask & Mod.BIT_NAME || bitmask & Mod.BIT_URL || bitmask & Mod.BIT_AUTHOR) continue // This is an entirely different mod, we can skip checking the rest
+                if (bitmask & Mod.BIT_NAME) continue // This is an entirely different mod, we can skip checking the rest
                 if (bitmask & Mod.BIT_VERSION) {
                     modReports.push(new ModReport(ModReport.MOD_VERSION_MISMATCH, mod, secondModListMod.getModVersion()))
                     modFound = true // The mod IS there, it just has a different version
