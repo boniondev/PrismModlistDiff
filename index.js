@@ -1,5 +1,4 @@
 import { Modlist } from "./modlist.js"
-import { Mod } from "./mod.js"
 import { ModReport } from "./modreport.js"
 import { animate } from "./libs/anime-4.3.6-modules/animation/index.js"
 
