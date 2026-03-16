@@ -1,4 +1,5 @@
 import { Modlist } from "./modlist.js"
+import { Mod } from "./mod.js"
 import { ModReport } from "./modreport.js"
 import { animate } from "./libs/anime-4.3.6-modules/animation/index.js"
 
@@ -98,6 +99,8 @@ function showResults(modReports) {
         fadeInElement(divIdenticalModLists)
     } else {
 
+        let ulMissingModsList = document.createElement('ul')
+
         let divMissingModsText = document.createElement('div')
         divMissingModsText.classList.add('resultContainerTextDiv')
         divMissingModsText.textContent = 'Missing mods'
@@ -106,6 +109,9 @@ function showResults(modReports) {
         divMissingModsContainer.id  = 'divMissingModsContainer'
         divMissingModsContainer.classList.add('resultContainer')
         divMissingModsContainer.appendChild(divMissingModsText)
+        divMissingModsContainer.appendChild(ulMissingModsList)
+
+        let ulMismatchedModsList = document.createElement('ul')
 
         let divMismatchedModsText = document.createElement('div')
         divMismatchedModsText.classList.add('resultContainerTextDiv')
@@ -115,6 +121,9 @@ function showResults(modReports) {
         divMismatchedModsContainer.id  = 'divMismatchedModsContainer'
         divMismatchedModsContainer.classList.add('resultContainer')
         divMismatchedModsContainer.appendChild(divMismatchedModsText)
+        divMismatchedModsContainer.appendChild(ulMismatchedModsList)
+
+        let ulExtraModsList = document.createElement('ul')
 
         let divExtraModsText = document.createElement('div')
         divExtraModsText.classList.add('resultContainerTextDiv')
@@ -124,23 +133,41 @@ function showResults(modReports) {
         divExtraModsContainer.id  = 'divExtraModsContainer'
         divExtraModsContainer.classList.add('resultContainer')
         divExtraModsContainer.appendChild(divExtraModsText)
+        divExtraModsContainer.appendChild(ulExtraModsList)
+
+        resultWrapper.appendChild(divMissingModsContainer)
+        resultWrapper.appendChild(divMismatchedModsContainer)
+        resultWrapper.appendChild(divExtraModsContainer)
 
         for (let modReport of modReports) {
+
+            let modReportText = document.createElement('li')
 
                 switch (modReport.getReportType()) {
 
                     case ModReport.MOD_MISSING:
-                        // Thing here
+                        let missingMod = modReport.getMod()
+                        modReportText.textContent = missingMod.getModName() + ' [' + missingMod.getModVersion() + ']'
+                        ulMissingModsList.appendChild(modReportText)
+                        break
                     case ModReport.MOD_UNEXPECTED:
-                        // Another thing here
+                        let unexpectedMod = modReport.getMod()
+                        modReportText.textContent = unexpectedMod.getModName() + ' [' + unexpectedMod.getModVersion() + ']'
+                        ulExtraModsList.appendChild(modReportText)
+                        break
                     case ModReport.MOD_VERSION_MISMATCH:
-                        // Another another thing here
-                    case ModReport.MOD_FILENAME_MISMATCH:
+                        let versionMismatchedMod = modReport.getMod()
+                        modReportText.textContent = versionMismatchedMod.getModName() + ' [' + modReport.getMismatchedValue() + '] -> [' + versionMismatchedMod.getModVersion() + ']'
+                        break
+                        case ModReport.MOD_FILENAME_MISMATCH:
                         // Surprisingly, no thing here. I find it unlikely that a mod has same version BUT a different filename. I guess print something onscreen?
 
                 }
 
         }
+
+        appWrapper.appendChild(resultWrapper)
+
     }
 
 }
