@@ -159,6 +159,7 @@ function showResults(modReports) {
                     case ModReport.MOD_VERSION_MISMATCH:
                         let versionMismatchedMod = modReport.getMod()
                         modReportText.textContent = versionMismatchedMod.getModName() + ' [' + modReport.getMismatchedValue() + '] -> [' + versionMismatchedMod.getModVersion() + ']'
+                        ulMismatchedModsList.appendChild(modReportText)
                         break
                         case ModReport.MOD_FILENAME_MISMATCH:
                         // Surprisingly, no thing here. I find it unlikely that a mod has same version BUT a different filename. I guess print something onscreen?
