@@ -57,5 +57,11 @@ html, body {
 .resultContainerTextDiv {
     font-family: '0xProto';
     color: white;
-    font-size: 0.50em;
+    font-size: 1.5em;
+    text-align: center;
+}
+.listItemModReportEntry {
+    font-family: '0xProto';
+    color: white;
+    font-size: 1em;
 }

@@ -142,6 +142,7 @@ function showResults(modReports) {
         for (let modReport of modReports) {
 
             let modReportText = document.createElement('li')
+            modReportText.classList.add('listItemModReportEntry')
 
                 switch (modReport.getReportType()) {
 
