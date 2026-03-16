@@ -11,4 +11,16 @@ export class ModReport {
         this.mismatchedValue = mismatchedValue
     }
 
+    getReportType() {
+        return this.reportType
+    }
+
+    getMod() {
+        return this.mod
+    }
+
+    getMismatchedValue() {
+        return this.mismatchedValue
+    }
+
 }
