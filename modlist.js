@@ -11,7 +11,7 @@ export class Modlist {
                 modJSONObject['name'],
                 modJSONObject['url'],
                 modJSONObject['version'],
-                modJSONObject['authors'][0], // Again, we only consider the first author
+                modJSONObject['authors']?.[0] ?? "", // Again, we only consider the first author
                 modJSONObject['version']
             ))
         }
