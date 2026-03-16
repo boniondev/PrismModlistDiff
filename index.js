@@ -112,7 +112,7 @@ function showResults(modReports) {
         divMismatchedModsText.textContent = 'Mismatched mods'
 
         let divMismatchedModsContainer = document.createElement('div')
-        divMismatchedModsContainer     = 'divMismatchedModsContainer'
+        divMismatchedModsContainer.id  = 'divMismatchedModsContainer'
         divMismatchedModsContainer.classList.add('resultContainer')
         divMismatchedModsContainer.appendChild(divMismatchedModsText)
 
@@ -121,7 +121,7 @@ function showResults(modReports) {
         divExtraModsText.textContent = 'Extra mods'
 
         let divExtraModsContainer = document.createElement('div')
-        divExtraModsContainer     = 'divExtraModsContainer'
+        divExtraModsContainer.id  = 'divExtraModsContainer'
         divExtraModsContainer.classList.add('resultContainer')
         divExtraModsContainer.appendChild(divExtraModsText)
 
