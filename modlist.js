@@ -2,13 +2,21 @@ import { Mod }       from './mod.js'
 import { ModReport } from './modreport.js'
 export class Modlist {
 
-    constructor(modListString) {
+    constructor(modListJSONString) {
 
         this.modListArray       = []
-        const modStringLines    = modListString.split('\n')
-        modStringLines.forEach(modListLine => {
-            this.modListArray.push(new Mod(modListLine))
-        });
+        const modListJsonObject = JSON.parse(modListJSONString)
+        for (let modJSONObject of modListJsonObject) {
+            this.modListArray.push(new Mod(
+                modJSONObject['name'],
+                modJSONObject['url'],
+                modJSONObject['version'],
+                modJSONObject['authors']?.[0] ?? "", // Again, we only consider the first author
+                modJSONObject['version']
+            ))
+        }
+        
+        console.log(this.modListArray)
 
     }
 
