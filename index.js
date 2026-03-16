@@ -1,4 +1,5 @@
 import { Modlist } from "./modlist.js"
+import { ModReport } from "./modreport.js"
 import { animate } from "./libs/anime-4.3.6-modules/animation/index.js"
 
 const inputTextWrapper = document.getElementById('inputTextWrapper')
@@ -95,6 +96,51 @@ function showResults(modReports) {
         resultWrapper.appendChild(divIdenticalModLists)
         appWrapper.appendChild(resultWrapper)
         fadeInElement(divIdenticalModLists)
+    } else {
+
+        let divMissingModsText = document.createElement('div')
+        divMissingModsText.classList.add('resultContainerTextDiv')
+        divMissingModsText.textContent = 'Missing mods'
+
+        let divMissingModsContainer = document.createElement('div')
+        divMissingModsContainer.id  = 'divMissingModsContainer'
+        divMissingModsContainer.classList.add('resultContainer')
+        divMissingModsContainer.appendChild(divMissingModsText)
+
+        let divMismatchedModsText = document.createElement('div')
+        divMismatchedModsText.classList.add('resultContainerTextDiv')
+        divMismatchedModsText.textContent = 'Mismatched mods'
+
+        let divMismatchedModsContainer = document.createElement('div')
+        divMismatchedModsContainer     = 'divMismatchedModsContainer'
+        divMismatchedModsContainer.classList.add('resultContainer')
+        divMismatchedModsContainer.appendChild(divMismatchedModsText)
+
+        let divExtraModsText = document.createElement('div')
+        divExtraModsText.classList.add('resultContainerTextDiv')
+        divExtraModsText.textContent = 'Extra mods'
+
+        let divExtraModsContainer = document.createElement('div')
+        divExtraModsContainer     = 'divExtraModsContainer'
+        divExtraModsContainer.classList.add('resultContainer')
+        divExtraModsContainer.appendChild(divExtraModsText)
+
+        for (let modReport of modReports) {
+
+                switch (modReport.getReportType()) {
+
+                    case ModReport.MOD_MISSING:
+                        // Thing here
+                    case ModReport.MOD_UNEXPECTED:
+                        // Another thing here
+                    case ModReport.MOD_VERSION_MISMATCH:
+                        // Another another thing here
+                    case ModReport.MOD_FILENAME_MISMATCH:
+                        // Surprisingly, no thing here. I find it unlikely that a mod has same version BUT a different filename. I guess print something onscreen?
+
+                }
+
+        }
     }
 
 }

@@ -48,3 +48,14 @@ html, body {
     font-size: 2em;
     opacity: 0;
 }
+.resultContainer {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    height: 100%;
+}
+.resultContainerTextDiv {
+    font-family: '0xProto';
+    color: white;
+    font-size: 0.50em;
+}
