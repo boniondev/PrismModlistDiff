@@ -15,8 +15,6 @@ export class Modlist {
                 modJSONObject['version']
             ))
         }
-        
-        console.log(this.modListArray)
 
     }
 
