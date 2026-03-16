@@ -15,15 +15,13 @@ export class Mod {
     static BIT_AUTHOR   = 1 << 3
     static BIT_FILENAME = 1 << 4
 
-    constructor(linestr) {
+    constructor(modName,modURL,modVersion,modAuthor,modFilename) {
 
-        let parsedline   = [""]
-        parsedline       = linestr.split(',')
-        this.modName     = parsedline[0]
-        this.modURL      = parsedline[1]
-        this.modVersion  = parsedline[2]
-        this.modAuthor   = parsedline[3]  // We only take the first author for simplicity
-        this.modFilename = parsedline[parsedline.length - 1]
+        this.modName     = modName
+        this.modURL      = modURL
+        this.modVersion  = modVersion
+        this.modAuthor   = modAuthor
+        this.modFilename = modFilename
 
     }
 
