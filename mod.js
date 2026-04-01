@@ -1,12 +1,3 @@
-/*
-    For reference:
-
-    When Prism exports a modlist as CSV with all options ticked, it uses this format:
-    modname,downloadURL,version,authorname,more authornames...,filename
-    The number of author names is ALWAYS >= 1
-
-*/
-
 export class Mod {
 
     static BIT_NAME     = 1 << 0
