@@ -4,10 +4,14 @@ import { animate } from "./libs/anime-4.3.6-modules/animation/index.js"
 
 const inputTextWrapper = document.getElementById('inputTextWrapper')
 const inputText        = document.getElementById('inputText')
+const JSWarning        = document.getElementById('JSWarning')
+const appWrapper       = document.getElementById('appWrapper')
 
 let firstModList  = ''
 let secondModList = ''
 
+JSWarning.remove()
+appWrapper.style.display = 'block'
 fadeInElement(inputTextWrapper)
 inputText.focus()
 
@@ -83,8 +87,6 @@ function compareModLists() {
 }
 
 function showResults(modReports) {
-
-    const appWrapper = document.getElementById('appWrapper')
 
     const resultWrapper = document.createElement('div')
     resultWrapper.id = 'resultWrapper'

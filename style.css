@@ -9,6 +9,10 @@ html, body {
 #appWrapper {
     height: 100vh;
     width: 100vw;
+    display: none;
+}
+#JSWarning {
+    color: white;
 }
 #inputTextWrapper {
     display: flex;
