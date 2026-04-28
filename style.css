@@ -6,12 +6,14 @@ html, body {
     background-color: black;
     margin: 0;
 }
+#JSWarning {
+    color: white;
+}
 #appWrapper {
     height: 100vh;
     width: 100vw;
     display: none;
 }
-#JSWarning {
     color: white;
 }
 #inputTextWrapper {
