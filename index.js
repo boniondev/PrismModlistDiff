@@ -11,7 +11,7 @@ let firstModList  = ''
 let secondModList = ''
 
 JSWarning.remove()
-appWrapper.style.display = 'block'
+appWrapper.style.display = 'flex'
 fadeInElement(inputTextWrapper)
 inputText.focus()
 
