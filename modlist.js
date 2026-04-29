@@ -1,5 +1,6 @@
 import { Mod }       from './mod.js'
 import { ModReport } from './modreport.js'
+import { DuplicatedModReport } from './duplicatedmodreport.js'
 export class Modlist {
 
     constructor(modListJSONString) {
@@ -70,6 +71,39 @@ export class Modlist {
         }
 
         return modReports
+
+    }
+
+    selfCheckForDuplicates() {
+
+        let duplicateMods = []
+
+        this.modListArray.forEach((mod, modIndex) => {
+
+            let detectedVersions = [mod.getModVersion()]
+
+            this.modListArray.forEach((altMod, altModIndex) => {
+
+                if (modIndex != altModIndex) {
+
+                    let bitmask = mod.compare(altMod)
+
+                    if (!(bitmask & Mod.BIT_NAME)
+                        && (bitmask & Mod.BIT_VERSION)) {
+                            detectedVersions.push(altMod.getModVersion())
+                        }
+
+                }
+
+            })
+
+            if (detectedVersions.length > 1) {
+                duplicateMods.push(new DuplicatedModReport(mod.getModName, detectedVersions))
+            }
+
+        })
+
+        return duplicateMods
 
     }
 
