@@ -2,17 +2,19 @@ import { Modlist } from "./modlist.js"
 import { ModReport } from "./modreport.js"
 import { animate } from "./libs/anime-4.3.6-modules/animation/index.js"
 
-const inputTextWrapper = document.getElementById('inputTextWrapper')
-const inputText        = document.getElementById('inputText')
-const JSWarning        = document.getElementById('JSWarning')
-const appWrapper       = document.getElementById('appWrapper')
+const inputTextWrapper       = document.getElementById('inputTextWrapper')
+const inputText              = document.getElementById('inputText')
+const JSWarning              = document.getElementById('JSWarning')
+const appWrapper             = document.getElementById('appWrapper')
+const modListCheckBoxWrapper = document.getElementById('modListCheckBoxWrapper')
+const modlistCheckCheckbox   = document.getElementById('modlistCheckCheckbox')
 
 let firstModList  = ''
 let secondModList = ''
 
 JSWarning.remove()
 appWrapper.style.display = 'flex'
-fadeInElement(inputTextWrapper)
+fadeInElement([inputTextWrapper, modListCheckBoxWrapper])
 inputText.focus()
 
 inputText.addEventListener('input', _on_inputText_input)
@@ -34,7 +36,7 @@ function _on_inputText_input() {
             inputText.placeholder = 'Splendid.'
             inputText.value = ''
             inputText.removeEventListener('input', _on_inputText_input)
-            fadeOutInputTextWrapper()
+            fadeOutElements()
         }
     }
 }
@@ -63,8 +65,8 @@ function fadeInElement(el) {
     })
 }
 
-function fadeOutInputTextWrapper() {
-    animate(inputTextWrapper, {
+function fadeOutElements() {
+    animate([modListCheckBoxWrapper,inputTextWrapper], {
         opacity    : [1,0],
         duration   : 1000,
         easy       : 'inExpo',
