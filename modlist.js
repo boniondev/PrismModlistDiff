@@ -76,7 +76,7 @@ export class Modlist {
 
     selfCheckForDuplicates() {
 
-        let duplicateMods = []
+        let duplicateModReports = []
 
         this.modListArray.forEach((mod, modIndex) => {
 
@@ -98,12 +98,12 @@ export class Modlist {
             })
 
             if (detectedVersions.length > 1) {
-                duplicateMods.push(new DuplicatedModReport(mod.getModName(), detectedVersions))
+                duplicateModReports.push(new DuplicatedModReport(mod.getModName(), detectedVersions))
             }
 
         })
 
-        return duplicateMods
+        return duplicateModReports
 
     }
 
