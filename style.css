@@ -46,6 +46,10 @@ html, body {
 #inputText::placeholder {
     color: grey;
 }
+#divDuplicatedModsInModLists {
+    display: flex;
+    gap: 5em;
+}
 #resultWrapper {
     display: flex;
     width: 100%;
@@ -75,4 +79,8 @@ html, body {
     font-family: '0xProto';
     color: white;
     font-size: 1em;
+}
+th, td {
+    font-family: '0xProto';
+    color:white;
 }

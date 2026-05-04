@@ -2,17 +2,20 @@ import { Modlist } from "./modlist.js"
 import { ModReport } from "./modreport.js"
 import { animate } from "./libs/anime-4.3.6-modules/animation/index.js"
 
-const inputTextWrapper = document.getElementById('inputTextWrapper')
-const inputText        = document.getElementById('inputText')
-const JSWarning        = document.getElementById('JSWarning')
-const appWrapper       = document.getElementById('appWrapper')
+const inputTextWrapper       = document.getElementById('inputTextWrapper')
+const inputText              = document.getElementById('inputText')
+const JSWarning              = document.getElementById('JSWarning')
+const appWrapper             = document.getElementById('appWrapper')
+const modListCheckBoxWrapper = document.getElementById('modListCheckBoxWrapper')
+const modlistCheckCheckbox   = document.getElementById('modlistCheckCheckbox')
 
-let firstModList  = ''
-let secondModList = ''
+let firstModList       = ''
+let secondModList      = ''
+let checkForDuplicates = false
 
 JSWarning.remove()
 appWrapper.style.display = 'flex'
-fadeInElement(inputTextWrapper)
+fadeInElement([inputTextWrapper, modListCheckBoxWrapper])
 inputText.focus()
 
 inputText.addEventListener('input', _on_inputText_input)
@@ -33,8 +36,10 @@ function _on_inputText_input() {
             secondModList = inputText.value
             inputText.placeholder = 'Splendid.'
             inputText.value = ''
+            modlistCheckCheckbox.disabled = true
+            checkForDuplicates = modlistCheckCheckbox.checked
             inputText.removeEventListener('input', _on_inputText_input)
-            fadeOutInputTextWrapper()
+            fadeOutElements()
         }
     }
 }
@@ -63,16 +68,120 @@ function fadeInElement(el) {
     })
 }
 
-function fadeOutInputTextWrapper() {
-    animate(inputTextWrapper, {
+function fadeOutElements() {
+    animate([modListCheckBoxWrapper,inputTextWrapper], {
         opacity    : [1,0],
         duration   : 1000,
         easy       : 'inExpo',
         onComplete : () => {
             inputTextWrapper.remove()
-            compareModLists()
+            modListCheckBoxWrapper.remove()
+            startProcessing()
         }
     })
+}
+
+function startProcessing() {
+
+    const parsedFirstModList  = new Modlist(firstModList)
+    const parsedSecondModList = new Modlist(secondModList)
+
+    if (checkForDuplicates) {
+
+        let duplicatedModsInFirstModlist  = parsedFirstModList.selfCheckForDuplicates()
+        let duplicatedModsInSecondModlist = parsedSecondModList.selfCheckForDuplicates()
+
+        if (duplicatedModsInFirstModlist.length > 0 || duplicatedModsInSecondModlist.length > 0) {
+
+            let divDuplicatedModsInModLists = document.createElement('div')
+            divDuplicatedModsInModLists.id  = 'divDuplicatedModsInModLists'
+            appWrapper.appendChild(divDuplicatedModsInModLists)
+
+            if (duplicatedModsInFirstModlist.length > 0) {
+
+                let duplicatedModsinFirstModListTable = document.createElement('table')
+                divDuplicatedModsInModLists.appendChild(duplicatedModsinFirstModListTable)
+
+                let duplicatedModsinFirstModListTable1stRow                      = document.createElement('tr')
+                let duplicatedModsinFirstModListTableModName1stTableHeader       = document.createElement('th')
+                duplicatedModsinFirstModListTableModName1stTableHeader.innerText = 'Mod'
+                let duplicatedModsinFirstModListTableModName2ndTableHeader       = document.createElement('th')
+                duplicatedModsinFirstModListTableModName2ndTableHeader.innerText = 'Versions'
+                duplicatedModsinFirstModListTable1stRow.appendChild(duplicatedModsinFirstModListTableModName1stTableHeader)
+                duplicatedModsinFirstModListTable1stRow.appendChild(duplicatedModsinFirstModListTableModName2ndTableHeader)
+
+                duplicatedModsinFirstModListTable.appendChild(duplicatedModsinFirstModListTable1stRow)
+
+                for (let duplicatedModReport of duplicatedModsInFirstModlist) {
+
+                    let versions = duplicatedModReport.getVersions()
+
+                    let newrow = document.createElement('tr')
+
+                    let modname = document.createElement('td')
+                    modname.rowSpan = versions.length + 1 
+                    modname.innerText = duplicatedModReport.getModName()
+                    newrow.appendChild(modname)
+                    duplicatedModsinFirstModListTable.appendChild(newrow)
+
+                    for (let modVersion of versions) {
+
+                        let newerrow = document.createElement('tr')
+                        let newtabledata = document.createElement('td')
+                        newtabledata.innerText = modVersion
+                        newerrow.appendChild(newtabledata)
+                        duplicatedModsinFirstModListTable.appendChild(newerrow)
+
+                    }
+
+                }
+            }
+
+            if (duplicatedModsInSecondModlist.length > 0) {
+
+                let duplicatedModsinSecondModListTable = document.createElement('table')
+                divDuplicatedModsInModLists.appendChild(duplicatedModsinSecondModListTable)
+
+                let duplicatedModsinSecondModListTable1stRow                      = document.createElement('tr')
+                let duplicatedModsinSecondModListTableModName1stTableHeader       = document.createElement('th')
+                duplicatedModsinSecondModListTableModName1stTableHeader.innerText = 'Mod'
+                let duplicatedModsinSecondModListTableModName2ndTableHeader       = document.createElement('th')
+                duplicatedModsinSecondModListTableModName2ndTableHeader.innerText = 'Versions'
+                duplicatedModsinSecondModListTable1stRow.appendChild(duplicatedModsinSecondModListTableModName1stTableHeader)
+                duplicatedModsinSecondModListTable1stRow.appendChild(duplicatedModsinSecondModListTableModName2ndTableHeader)
+
+                duplicatedModsinSecondModListTable.appendChild(duplicatedModsinSecondModListTable1stRow)
+
+                for (let duplicatedModReport of duplicatedModsInSecondModlist) {
+
+                    let versions = duplicatedModReport.getVersions()
+
+                    let newrow = document.createElement('tr')
+
+                    let modname = document.createElement('td')
+                    modname.rowSpan = versions.length + 1
+                    modname.innerText = duplicatedModReport.getModName()
+                    newrow.appendChild(modname)
+                    duplicatedModsinSecondModListTable.appendChild(newrow)
+
+                    for (let modVersion of versions) {
+
+                        let newerrow = document.createElement('tr')
+                        let newtabledata = document.createElement('td')
+                        newtabledata.innerHTML = modVersion
+                        newerrow.appendChild(newtabledata)
+                        duplicatedModsinSecondModListTable.appendChild(newerrow)
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
 }
 
 function compareModLists() {
