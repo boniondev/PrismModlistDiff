@@ -82,25 +82,39 @@ export class Modlist {
 
             let detectedVersions = [mod.getModVersion()]
 
-            this.modListArray.forEach((altMod, altModIndex) => {
+            let reportAlreadyPresent = false
 
-                if (modIndex != altModIndex) {
-
-                    let bitmask = mod.compare(altMod)
-
-                    if (!(bitmask & Mod.BIT_NAME)
-                        && (bitmask & Mod.BIT_VERSION)) {
-                            detectedVersions.push(altMod.getModVersion())
-                        }
-
+            if (duplicateModReports.length > 0) {
+                for (let duplicatedModReport of duplicateModReports) {
+                    if (mod.getModName() === duplicatedModReport.getModName()) {
+                        reportAlreadyPresent = true
+                        break
+                    }
                 }
-
-            })
-
-            if (detectedVersions.length > 1) {
-                duplicateModReports.push(new DuplicatedModReport(mod.getModName(), detectedVersions))
             }
 
+            if (!reportAlreadyPresent) {
+
+                this.modListArray.forEach((altMod, altModIndex) => {
+
+                    if (modIndex != altModIndex) {
+
+                        let bitmask = mod.compare(altMod)
+
+                        if (!(bitmask & Mod.BIT_NAME)
+                            && (bitmask & Mod.BIT_VERSION)) {
+                                detectedVersions.push(altMod.getModVersion())
+                            }
+
+                    }
+
+                })
+
+                if (detectedVersions.length > 1) {
+                    duplicateModReports.push(new DuplicatedModReport(mod.getModName(), detectedVersions))
+                }
+
+            }
         })
 
         return duplicateModReports
