@@ -98,7 +98,7 @@ export class Modlist {
             })
 
             if (detectedVersions.length > 1) {
-                duplicateMods.push(new DuplicatedModReport(mod.getModName, detectedVersions))
+                duplicateMods.push(new DuplicatedModReport(mod.getModName(), detectedVersions))
             }
 
         })
