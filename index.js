@@ -146,6 +146,9 @@ function startProcessing() {
 
         if (areThereDuplicatedMods) {
             appWrapper.appendChild(divDuplicateTableContainer)
+        } else {
+            const modReports = parsedModLists[0].compare(parsedModLists[1])
+            showResults(modReports)
         }
 
     }
@@ -173,17 +176,6 @@ function warnUserAboutInvalidJSON() {
     newDiv.innerText = "One or more provided modlists were invalid. Did you paste JSON? Did you edit the JSON?"
     newDiv.classList.add("warningText")
     appWrapper.appendChild(newDiv)
-}
-
-function compareModLists() {
-
-    const parsedFirstModList  = new Modlist(firstModList)
-    const parsedSecondModList = new Modlist(secondModList)
-
-    const modReports = parsedFirstModList.compare(parsedSecondModList)
-
-    showResults(modReports)
-
 }
 
 function showResults(modReports) {
