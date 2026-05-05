@@ -83,6 +83,13 @@ function fadeOutElements() {
 
 function startProcessing() {
 
+    const parsedModLists = parseJSON([firstModList,secondModList])
+
+    if (!parsedModLists) {
+        warnUserAboutInvalidJSON()
+        return -1
+    }
+
     const parsedFirstModList  = new Modlist(firstModList)
     const parsedSecondModList = new Modlist(secondModList)
 
@@ -182,6 +189,30 @@ function startProcessing() {
 
     }
 
+}
+
+function parseJSON(textArray) {
+    let JSONArray = []
+    try {
+        for (let text of textArray) {
+            JSONArray.push(new Modlist(text))
+        }
+        return JSONArray
+    } catch (e) {
+        if (e instanceof SyntaxError) {
+            return false
+        } else {
+            throw e //JSON.parse exclusively throws SyntaxError, but you never know
+        }
+    }
+
+}
+
+function warnUserAboutInvalidJSON() {
+    let newDiv = document.createElement('div')
+    newDiv.innerText = "One or more provided modlists were invalid. Did you paste JSON? Did you edit the JSON?"
+    newDiv.classList.add("warningText")
+    appWrapper.appendChild(newDiv)
 }
 
 function compareModLists() {

@@ -76,6 +76,9 @@ html, body {
     color: white;
     font-size: 1em;
 }
+.warningText {
+    color:red
+}
 table, tr, th, td {
     border: 0.1rem solid white;
     border-collapse: collapse;
