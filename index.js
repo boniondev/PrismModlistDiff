@@ -145,6 +145,10 @@ function startProcessing() {
         }
 
         if (areThereDuplicatedMods) {
+            let divWarnString = document.createElement('div')
+            divWarnString.classList.add('warningText')
+            divWarnString.innerText = "Duplicate mods detected. Remove them so there is only one version of every mod, then retry."
+            appWrapper.appendChild(divWarnString)
             appWrapper.appendChild(divDuplicateTableContainer)
         } else {
             const modReports = parsedModLists[0].compare(parsedModLists[1])
