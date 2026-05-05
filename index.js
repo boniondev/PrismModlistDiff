@@ -90,105 +90,65 @@ function startProcessing() {
         return -1
     }
 
-    const parsedFirstModList  = new Modlist(firstModList)
-    const parsedSecondModList = new Modlist(secondModList)
-
     if (checkForDuplicates) {
 
-        let duplicatedModsInFirstModlist  = parsedFirstModList.selfCheckForDuplicates()
-        let duplicatedModsInSecondModlist = parsedSecondModList.selfCheckForDuplicates()
+        let duplicatedModReportsArray = []
+        for (let parsedModList of parsedModLists) {
+            duplicatedModReportsArray.push(parsedModList.selfCheckForDuplicates())
+        }
 
-        if (duplicatedModsInFirstModlist.length > 0 || duplicatedModsInSecondModlist.length > 0) {
+        let divDuplicateTableContainer = document.createElement('div')
+        divDuplicateTableContainer.id = 'divDuplicateTableContainer'
 
-            let divDuplicatedModsInModLists = document.createElement('div')
-            divDuplicatedModsInModLists.id  = 'divDuplicatedModsInModLists'
-            appWrapper.appendChild(divDuplicatedModsInModLists)
+        let areThereDuplicatedMods = false
 
-            if (duplicatedModsInFirstModlist.length > 0) {
+        for (let duplicatedModReports of duplicatedModReportsArray) {
 
-                let duplicatedModsinFirstModListTable = document.createElement('table')
-                divDuplicatedModsInModLists.appendChild(duplicatedModsinFirstModListTable)
+            if (duplicatedModReports.length > 0) {
 
-                let duplicatedModsinFirstModListTable1stRow                      = document.createElement('tr')
-                let duplicatedModsinFirstModListTableModName1stTableHeader       = document.createElement('th')
-                duplicatedModsinFirstModListTableModName1stTableHeader.innerText = 'Mod'
-                let duplicatedModsinFirstModListTableModName2ndTableHeader       = document.createElement('th')
-                duplicatedModsinFirstModListTableModName2ndTableHeader.innerText = 'Versions'
-                duplicatedModsinFirstModListTable1stRow.appendChild(duplicatedModsinFirstModListTableModName1stTableHeader)
-                duplicatedModsinFirstModListTable1stRow.appendChild(duplicatedModsinFirstModListTableModName2ndTableHeader)
+                areThereDuplicatedMods = true
 
-                duplicatedModsinFirstModListTable.appendChild(duplicatedModsinFirstModListTable1stRow)
+                let tableDuplicatedMods = document.createElement('table')
+                let firstRow = document.createElement('tr')
+                let firstRowHeader1 = document.createElement('th')
+                firstRowHeader1.innerText = 'Mod'
+                let firstRowHeader2 = document.createElement('th')
+                firstRowHeader2.innerText = 'Version'
+                firstRow.appendChild(firstRowHeader1)
+                firstRow.appendChild(firstRowHeader2)
+                tableDuplicatedMods.appendChild(firstRow)
 
-                for (let duplicatedModReport of duplicatedModsInFirstModlist) {
-
-                    let versions = duplicatedModReport.getVersions()
-
-                    let newrow = document.createElement('tr')
-
-                    let modname = document.createElement('td')
-                    modname.rowSpan = versions.length + 1 
-                    modname.innerText = duplicatedModReport.getModName()
-                    newrow.appendChild(modname)
-                    duplicatedModsinFirstModListTable.appendChild(newrow)
-
-                    for (let modVersion of versions) {
-
-                        let newerrow = document.createElement('tr')
-                        let newtabledata = document.createElement('td')
-                        newtabledata.innerText = modVersion
-                        newerrow.appendChild(newtabledata)
-                        duplicatedModsinFirstModListTable.appendChild(newerrow)
-
-                    }
-
-                }
-            }
-
-            if (duplicatedModsInSecondModlist.length > 0) {
-
-                let duplicatedModsinSecondModListTable = document.createElement('table')
-                divDuplicatedModsInModLists.appendChild(duplicatedModsinSecondModListTable)
-
-                let duplicatedModsinSecondModListTable1stRow                      = document.createElement('tr')
-                let duplicatedModsinSecondModListTableModName1stTableHeader       = document.createElement('th')
-                duplicatedModsinSecondModListTableModName1stTableHeader.innerText = 'Mod'
-                let duplicatedModsinSecondModListTableModName2ndTableHeader       = document.createElement('th')
-                duplicatedModsinSecondModListTableModName2ndTableHeader.innerText = 'Versions'
-                duplicatedModsinSecondModListTable1stRow.appendChild(duplicatedModsinSecondModListTableModName1stTableHeader)
-                duplicatedModsinSecondModListTable1stRow.appendChild(duplicatedModsinSecondModListTableModName2ndTableHeader)
-
-                duplicatedModsinSecondModListTable.appendChild(duplicatedModsinSecondModListTable1stRow)
-
-                for (let duplicatedModReport of duplicatedModsInSecondModlist) {
+                for (let duplicatedModReport of duplicatedModReports) {
 
                     let versions = duplicatedModReport.getVersions()
-
                     let newrow = document.createElement('tr')
-
                     let modname = document.createElement('td')
                     modname.rowSpan = versions.length + 1
                     modname.innerText = duplicatedModReport.getModName()
                     newrow.appendChild(modname)
-                    duplicatedModsinSecondModListTable.appendChild(newrow)
+                    tableDuplicatedMods.appendChild(newrow)
 
                     for (let modVersion of versions) {
 
-                        let newerrow = document.createElement('tr')
-                        let newtabledata = document.createElement('td')
-                        newtabledata.innerHTML = modVersion
-                        newerrow.appendChild(newtabledata)
-                        duplicatedModsinSecondModListTable.appendChild(newerrow)
+                        let newerRow = document.createElement('tr')
+                        let newTableData = document.createElement('td')
+                        newTableData.innerText = modVersion
+                        newerRow.appendChild(newTableData)
+                        tableDuplicatedMods.appendChild(newerRow)
 
                     }
-
                 }
 
-            }
+                divDuplicateTableContainer.appendChild(tableDuplicatedMods)
 
+            }
+        }
+
+        if (areThereDuplicatedMods) {
+            appWrapper.appendChild(divDuplicateTableContainer)
         }
 
     }
-
 }
 
 function parseJSON(textArray) {
