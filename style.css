@@ -3,24 +3,34 @@
     src: url("./fonts/0xProto/0xProto-Regular.woff2") format("woff2");
 }
 html, body {
+    font-family: '0xProto';
     background-color: black;
     margin: 0;
+}
+#JSWarning {
+    color: white;
 }
 #appWrapper {
     height: 100vh;
     width: 100vw;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+#modlistCheckLabel {
+    color: white;
 }
 #inputTextWrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
     width: 100%;
     color: white;
     opacity: 0;
 }
 #inputText {
-    font-family: '0xProto';
     font-size: 1rem;
     background-color: black;
     color: inherit;
@@ -35,6 +45,10 @@ html, body {
 #inputText::placeholder {
     color: grey;
 }
+#divDuplicateTableContainer {
+    display: flex;
+    gap: 10em;
+}
 #resultWrapper {
     display: flex;
     width: 100%;
@@ -43,7 +57,6 @@ html, body {
     justify-content: center;
 }
 #divIdenticalModLists {
-    font-family: '0xProto';
     color: greenyellow;
     font-size: 2em;
     opacity: 0;
@@ -55,13 +68,21 @@ html, body {
     height: 100%;
 }
 .resultContainerTextDiv {
-    font-family: '0xProto';
     color: white;
     font-size: 1.5em;
     text-align: center;
 }
 .listItemModReportEntry {
-    font-family: '0xProto';
     color: white;
     font-size: 1em;
+}
+.warningText {
+    color:red
+}
+table, tr, th, td {
+    padding: 1em;
+    border: 0.1rem solid white;
+    border-collapse: collapse;
+    color:white;
+    text-align: center;
 }

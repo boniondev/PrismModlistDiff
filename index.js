@@ -2,13 +2,20 @@ import { Modlist } from "./modlist.js"
 import { ModReport } from "./modreport.js"
 import { animate } from "./libs/anime-4.3.6-modules/animation/index.js"
 
-const inputTextWrapper = document.getElementById('inputTextWrapper')
-const inputText        = document.getElementById('inputText')
+const inputTextWrapper       = document.getElementById('inputTextWrapper')
+const inputText              = document.getElementById('inputText')
+const JSWarning              = document.getElementById('JSWarning')
+const appWrapper             = document.getElementById('appWrapper')
+const modListCheckBoxWrapper = document.getElementById('modListCheckBoxWrapper')
+const modlistCheckCheckbox   = document.getElementById('modlistCheckCheckbox')
 
-let firstModList  = ''
-let secondModList = ''
+let firstModList       = ''
+let secondModList      = ''
+let checkForDuplicates = false
 
-fadeInElement(inputTextWrapper)
+JSWarning.remove()
+appWrapper.style.display = 'flex'
+fadeInElement([inputTextWrapper, modListCheckBoxWrapper])
 inputText.focus()
 
 inputText.addEventListener('input', _on_inputText_input)
@@ -29,8 +36,10 @@ function _on_inputText_input() {
             secondModList = inputText.value
             inputText.placeholder = 'Splendid.'
             inputText.value = ''
+            modlistCheckCheckbox.disabled = true
+            checkForDuplicates = modlistCheckCheckbox.checked
             inputText.removeEventListener('input', _on_inputText_input)
-            fadeOutInputTextWrapper()
+            fadeOutElements()
         }
     }
 }
@@ -59,32 +68,121 @@ function fadeInElement(el) {
     })
 }
 
-function fadeOutInputTextWrapper() {
-    animate(inputTextWrapper, {
+function fadeOutElements() {
+    animate([modListCheckBoxWrapper,inputTextWrapper], {
         opacity    : [1,0],
         duration   : 1000,
         easy       : 'inExpo',
         onComplete : () => {
             inputTextWrapper.remove()
-            compareModLists()
+            modListCheckBoxWrapper.remove()
+            startProcessing()
         }
     })
 }
 
-function compareModLists() {
+function startProcessing() {
 
-    const parsedFirstModList  = new Modlist(firstModList)
-    const parsedSecondModList = new Modlist(secondModList)
+    const parsedModLists = parseJSON([firstModList,secondModList])
 
-    const modReports = parsedFirstModList.compare(parsedSecondModList)
+    if (!parsedModLists) {
+        warnUserAboutInvalidJSON()
+        return -1
+    }
 
-    showResults(modReports)
+    if (checkForDuplicates) {
+
+        let duplicatedModReportsArray = []
+        for (let parsedModList of parsedModLists) {
+            duplicatedModReportsArray.push(parsedModList.selfCheckForDuplicates())
+        }
+
+        let divDuplicateTableContainer = document.createElement('div')
+        divDuplicateTableContainer.id = 'divDuplicateTableContainer'
+
+        let areThereDuplicatedMods = false
+
+        for (let duplicatedModReports of duplicatedModReportsArray) {
+
+            if (duplicatedModReports.length > 0) {
+
+                areThereDuplicatedMods = true
+
+                let tableDuplicatedMods = document.createElement('table')
+                let firstRow = document.createElement('tr')
+                let firstRowHeader1 = document.createElement('th')
+                firstRowHeader1.innerText = 'Mod'
+                let firstRowHeader2 = document.createElement('th')
+                firstRowHeader2.innerText = 'Version'
+                firstRow.appendChild(firstRowHeader1)
+                firstRow.appendChild(firstRowHeader2)
+                tableDuplicatedMods.appendChild(firstRow)
+
+                for (let duplicatedModReport of duplicatedModReports) {
+
+                    let versions = duplicatedModReport.getVersions()
+                    let newrow = document.createElement('tr')
+                    let modname = document.createElement('td')
+                    modname.rowSpan = versions.length + 1
+                    modname.innerText = duplicatedModReport.getModName()
+                    newrow.appendChild(modname)
+                    tableDuplicatedMods.appendChild(newrow)
+
+                    for (let modVersion of versions) {
+
+                        let newerRow = document.createElement('tr')
+                        let newTableData = document.createElement('td')
+                        newTableData.innerText = modVersion
+                        newerRow.appendChild(newTableData)
+                        tableDuplicatedMods.appendChild(newerRow)
+
+                    }
+                }
+
+                divDuplicateTableContainer.appendChild(tableDuplicatedMods)
+
+            }
+        }
+
+        if (areThereDuplicatedMods) {
+            let divWarnString = document.createElement('div')
+            divWarnString.classList.add('warningText')
+            divWarnString.innerText = "Duplicate mods detected. Remove them so there is only one version of every mod, then retry."
+            appWrapper.appendChild(divWarnString)
+            appWrapper.appendChild(divDuplicateTableContainer)
+        } else {
+            const modReports = parsedModLists[0].compare(parsedModLists[1])
+            showResults(modReports)
+        }
+
+    }
+}
+
+function parseJSON(textArray) {
+    let JSONArray = []
+    try {
+        for (let text of textArray) {
+            JSONArray.push(new Modlist(text))
+        }
+        return JSONArray
+    } catch (e) {
+        if (e instanceof SyntaxError) {
+            return false
+        } else {
+            throw e //JSON.parse exclusively throws SyntaxError, but you never know
+        }
+    }
 
 }
 
-function showResults(modReports) {
+function warnUserAboutInvalidJSON() {
+    let newDiv = document.createElement('div')
+    newDiv.innerText = "One or more provided modlists were invalid. Did you paste JSON? Did you edit the JSON?"
+    newDiv.classList.add("warningText")
+    appWrapper.appendChild(newDiv)
+}
 
-    const appWrapper = document.getElementById('appWrapper')
+function showResults(modReports) {
 
     const resultWrapper = document.createElement('div')
     resultWrapper.id = 'resultWrapper'
