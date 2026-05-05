@@ -47,7 +47,7 @@ html, body {
 }
 #divDuplicateTableContainer {
     display: flex;
-    gap: 5em;
+    gap: 10em;
 }
 #resultWrapper {
     display: flex;
@@ -80,6 +80,7 @@ html, body {
     color:red
 }
 table, tr, th, td {
+    padding: 1em;
     border: 0.1rem solid white;
     border-collapse: collapse;
     color:white;
