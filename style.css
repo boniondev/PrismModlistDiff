@@ -3,6 +3,7 @@
     src: url("./fonts/0xProto/0xProto-Regular.woff2") format("woff2");
 }
 html, body {
+    font-family: '0xProto';
     background-color: black;
     margin: 0;
 }
@@ -19,7 +20,6 @@ html, body {
     gap: 1rem;
 }
 #modlistCheckLabel {
-    font-family: '0xProto';
     color: white;
 }
 #inputTextWrapper {
@@ -31,7 +31,6 @@ html, body {
     opacity: 0;
 }
 #inputText {
-    font-family: '0xProto';
     font-size: 1rem;
     background-color: black;
     color: inherit;
@@ -58,7 +57,6 @@ html, body {
     justify-content: center;
 }
 #divIdenticalModLists {
-    font-family: '0xProto';
     color: greenyellow;
     font-size: 2em;
     opacity: 0;
@@ -70,20 +68,17 @@ html, body {
     height: 100%;
 }
 .resultContainerTextDiv {
-    font-family: '0xProto';
     color: white;
     font-size: 1.5em;
     text-align: center;
 }
 .listItemModReportEntry {
-    font-family: '0xProto';
     color: white;
     font-size: 1em;
 }
 table, tr, th, td {
     border: 0.1rem solid white;
     border-collapse: collapse;
-    font-family: '0xProto';
     color:white;
     text-align: center;
 }
